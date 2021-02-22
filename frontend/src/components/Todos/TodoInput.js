@@ -75,18 +75,22 @@ const TodoInput = () => {
           <Formik
             initialValues={{
               name: todo?.name || "",
-              from: todo?.todo_from,
-              to: todo?.todo_to,
+              todo_from: todo?.todo_from,
+              todo_to: todo?.todo_to,
+              date:todo?.date
             }}
             validate={(values) => {
               const errors = {};
               if (!values.name) {
                 errors.name = "*Required";
               }
-              if (!values.from) {
+              if (!values.date) {
+                errors.date = "*Required";
+              }
+              if (!values.todo_from) {
                 errors.from = "*Required";
               }
-              if (!values.to) {
+              if (!values.todo_to) {
                 errors.to = "*Required";
               }
               return errors;
@@ -94,62 +98,73 @@ const TodoInput = () => {
             onSubmit={(values, { setSubmitting }) => {
               values["is_active"] = active;
               console.log("va", values);
-               
-        const ft=new Date(values['from']).getTime();
-        values['from']=String(ft).substr(0,10)
-        const tt=new Date(values['to']).getTime();
-        values['to']=String(tt).substr(0,10)
-        console.log("v2a", values);
-              // if (!(todo?.id))
-              //   dispatch(
-              //     todoAdd({
-              //       values,
-              //       setSubmitting,
-
-              //     })
-              //   );
-              // else {
-              //   delete values.File;
-              //   values["id"] = todo?.id;
-              //   dispatch(
-              //     todoUpdate({
-              //       values,
-              //       setSubmitting,
-              //     })
-              //   );
-              // }
+              if (!todo?.id)
+                dispatch(
+                  todoAdd({
+                    values,
+                    setSubmitting,
+                  })
+                );
+              else {
+                values["id"] = todo?.id;
+                dispatch(
+                  todoUpdate({
+                    values,
+                    setSubmitting,
+                  })
+                );
+              }
             }}
           >
-            {({ submitForm, isSubmitting ,errors}) => (
+            {({ submitForm, isSubmitting, errors }) => (
               <Form style={{ padding: theme.spacing(1) }}>
                 <Typography variant="subtitle1">
                   What's in your mind ??
                 </Typography>
-                <Field name="name"  />
+                <Field name="name" />
                 {errors.name}
-                <Typography variant="subtitle1">From</Typography>
+                <Typography variant="subtitle1">Date</Typography>
                 <Field
-                  id="datetime-from"
-                  type="datetime-local"
-                  name="from"
-                  defaultValue="2020-05-24T10:30"
+                  id="date"
+                  type="date"
+                  name="date"
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                />
+
+                {errors.date}
+                <Typography variant="subtitle1">From</Typography>
+                <Field
+                  id="time-from"
+                  label="From"
+                  type="time"
+                  name="todo_from"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
                   }}
                 />
                 {errors.from}
                 <Typography variant="subtitle1">To</Typography>
                 <Field
-                  id="datetime-to"
-                  type="datetime-local"
-                  name="to"
-                  defaultValue="2020-05-24T10:30"
+                  id="time-to"
+                  label="To"
+                  type="time"
+                  name="todo_to"
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
                 />
+
                 {errors.to}
                 <Typography variant="subtitle1">Status</Typography>
                 <Switch

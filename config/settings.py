@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "import_export",
-    "todos"
+    "todos",
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -122,4 +123,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ['django_filters.rest_framework.DjangoFilterBackend',],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+    # 'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.BasicAuthentication',
+    ]
+ 
+}
+
+
 CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]

@@ -36,10 +36,11 @@ function App(props) {
       container
       justify='center'
       alignItems={matches ? 'flex-start' : 'center'}
+      
     >
-      <Grid item>
-        <Paper elevation={8}>
-          <Todos />
+      <Grid item  style={{width:"50%"}}>
+        <Paper elevation={8}  >
+          <Todos  />
         </Paper>
         <FormControlLabel
           control={
@@ -51,7 +52,6 @@ function App(props) {
           label='Dark Mode'
         />
       </Grid>
-      {/* <Footer /> */}
     </Grid>
   );
 }

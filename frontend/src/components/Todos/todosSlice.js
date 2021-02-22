@@ -5,7 +5,7 @@ export const todosSlice = createSlice({
   name: "todos",
   initialState: {
     todos: [],
-    todosLoading: false,
+    todosLoading: true,
     todo: null,
     todoLoading: false,
     editTodo: null,

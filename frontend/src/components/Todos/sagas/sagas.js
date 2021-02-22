@@ -20,7 +20,9 @@ import {
 export function* todosListingSaga(params) {
   try {
     yield put(setTodosLoading(true));
+    console.log("params", params);
     const fetchedTodos = yield call(getTodosListing, params.data);
+    console.log(fetchedTodos);
     yield put(setTodos(fetchedTodos.data));
     yield put(setTodosLoading(false));
   } catch (err) {
@@ -43,20 +45,20 @@ export function* todoUpdateSaga(params) {
   } = params;
   try {
     if (setSubmitting) setSubmitting(true);
-    const data = yield call(formData, values);
-    const { data: result } = yield call(putTodoUpdate, data, values?.id);
+    // const data = yield call(formData, values);
+    const { data: result } = yield call(putTodoUpdate, values, values?.id);
     const todos = yield select(selectTodos);
     const newTodos = {
       ...todos,
-      results:  (todos?.results || []).todo((r) => {
-              if (r.id === result.id) {
-                return {
-                  ...r,
-                  ...result,
-                };
-              }
-              return r;
-            })
+      results: (todos?.results || []).todo((r) => {
+        if (r.id === result.id) {
+          return {
+            ...r,
+            ...result,
+          };
+        }
+        return r;
+      }),
     };
     yield put(setTodos(newTodos));
     yield put(setTodo(result));
@@ -90,14 +92,10 @@ export function* todoAddSaga(params) {
 
   try {
     if (setSubmitting) setSubmitting(true);
-    
-    const data = yield call(formData, values);
-    const { data: result } = yield call(postTodoAdd, data);
+    const { data: result } = yield call(postTodoAdd, values);
     const todos = yield select(selectTodos);
-    const newTodos = {
-      ...todos,
-      results: [...todos?.results, result],
-    };
+    const newTodos = [...todos, result];
+
     yield put(setTodos(newTodos));
     yield put(
       enqueueSnackbar({
@@ -108,7 +106,7 @@ export function* todoAddSaga(params) {
         },
       })
     );
-   } catch (err) {
+  } catch (err) {
     yield put(
       enqueueSnackbar({
         message: "Todo Added Failed!",
@@ -118,10 +116,8 @@ export function* todoAddSaga(params) {
         },
       })
     );
-    
   }
   setSubmitting(false);
-  
 }
 
 export function* todoDeleteSaga(params) {
@@ -129,11 +125,8 @@ export function* todoDeleteSaga(params) {
     const result = yield call(deleteTodoDelete, params?.data);
     if (result?.status === 202) {
       const todos = yield select(selectTodos);
-      const newTodos = {
-        ...todos,
-        count: todos.count - 1,
-        results: (todos?.results || []).filter((r) => r?.id !== params?.data),
-      };
+      const newTodos = (todos || []).filter((r) => r?.id !== params?.data);
+
       yield put(setTodos(newTodos));
     }
 
@@ -158,7 +151,6 @@ export function* todoDeleteSaga(params) {
     );
   }
 }
-
 
 const formData = (values) => {
   let formData = new FormData();

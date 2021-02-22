@@ -8,7 +8,7 @@ import TodoList from './TodoList';
 
 const Todos = () => {
  return (
-    <Box p={2}>
+    <Box p={2} >
       <Grid container direction='column'>
         <Grid item>
           <TodoInput />
