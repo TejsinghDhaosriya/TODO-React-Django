@@ -10,8 +10,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
-import { todoDelete, todosListing } from "./actions";
-import { selectTodos, selectTodosLoading } from "./todosSlice";
+import { todoDelete, todoDetails, todosListing, todoUpdate } from "./actions";
+import {
+  selectTodo,
+  selectTodos,
+  selectTodosLoading,
+  setFormDrawerOpen,
+  setTodo,
+} from "./todosSlice";
 import {
   Typography,
   CircularProgress,
@@ -30,25 +36,12 @@ const TodoList = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const todos = useSelector(selectTodos);
+
   const todosLoading = useSelector(selectTodosLoading);
-  const [filter, setFilter] = useState("all");
-  //   const { todos as todos_list, toggleTodo, removeTodo } = useTodos();
   console.log(todos);
   useEffect(() => {
     dispatch(todosListing());
   }, []);
-  const filteredTodos = useMemo(() => {
-    if (filter === "all") {
-      return todos;
-    } else if (filter === "completed") {
-      return todos.filter((todo) => todo.completed);
-    } else if (filter === "not_completed") {
-      return todos.filter((todo) => !todo.completed);
-    }
-  }, [todos, filter]);
-
-
-
 
   return (
     <>
@@ -67,14 +60,17 @@ const TodoList = () => {
               <ListItemSecondaryAction>
                 <Checkbox
                   checked={todo?.is_active}
-                  //   onClick={() => toggleTodo(todo.id)}
+                  onClick={() => {
+                    dispatch(setFormDrawerOpen(false));
+                    dispatch(setTodo({}));
+                    dispatch(setFormDrawerOpen(true));
+                    dispatch(setTodo(todo.id));
+                  
+                  }}
                 />
-                <IconButton
-                onClick={() => dispatch(todoDelete(todo.id))}
-                >
+                <IconButton onClick={() => dispatch(todoDelete(todo.id))}>
                   <DeleteIcon />
                 </IconButton>
-             
               </ListItemSecondaryAction>
             </ListItem>
           ))
@@ -107,7 +103,6 @@ const TodoList = () => {
           Not Completed
         </Button>
       </Box>
-     
     </>
   );
 };

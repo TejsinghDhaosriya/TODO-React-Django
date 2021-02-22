@@ -32,7 +32,7 @@ import {
   Switch,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { selectTodo } from "./todosSlice";
+import { selectFormDrawerOpen, selectTodo, setFormDrawerOpen } from "./todosSlice";
 import { todoAdd, todosListing, todoUpdate } from "./actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,25 +48,36 @@ const TodoInput = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const [active, setActive] = useState(false);
-  const [toggleFilterState, setToggleFilterState] = useState(false);
-  const [toggleAddState, setToggleAddState] = useState(false);
-  const [filterDate,setFilterDate] =useState('');
-
   const todo = useSelector(selectTodo);
+  const [active, setActive] = useState(todo?.is_active||false);
+  const [toggleFilterState, setToggleFilterState] = useState(false);
+  // const [toggleAddState, setToggleAddState] = useState(false);
+  const [filterDate, setFilterDate] = useState("");
+  const formDrawerOpen = useSelector(selectFormDrawerOpen)
+
 
   return (
     <Grid container direction="column">
       <Grid item container justify="flex-end">
-        <Button onClick={() => {setToggleFilterState(false);setToggleAddState(!toggleAddState)}}>
-          {toggleAddState ? "Close Add Todo" : "Add Todo"}
+        <Button
+          onClick={() => {
+            setToggleFilterState(false);
+            dispatch(setFormDrawerOpen(!formDrawerOpen))
+          }}
+        >
+          {formDrawerOpen ? "Close Add Todo" : "Add Todo"}
         </Button>
-        <Button onClick={() => {setToggleAddState(false);setToggleFilterState(!toggleFilterState)}}>
+        <Button
+          onClick={() => {
+            dispatch(setFormDrawerOpen(false))
+            setToggleFilterState(!toggleFilterState);
+          }}
+        >
           {toggleFilterState ? "Close Filter Todo" : "Filter Todo"}
         </Button>
       </Grid>
       <Grid item>
-        {toggleAddState ? (
+        {formDrawerOpen ? (
           <>
             <Grid item container direction="row">
               <Grid item xs>
@@ -81,11 +92,13 @@ const TodoInput = () => {
               <Divider />
               <Formik
                 initialValues={{
-                  name: todo?.name || "",
+                  name: todo?.name || "s",
                   todo_from: todo?.todo_from,
                   todo_to: todo?.todo_to,
+                  is_active:todo?.is_active,
                   date: todo?.date,
                 }}
+                enableReinitialize = {true}
                 validate={(values) => {
                   const errors = {};
                   if (!values.name) {
@@ -102,9 +115,8 @@ const TodoInput = () => {
                   }
                   return errors;
                 }}
+          
                 onSubmit={(values, { setSubmitting }) => {
-                  values["is_active"] = active;
-                  console.log("va", values);
                   if (!todo?.id)
                     dispatch(
                       todoAdd({
@@ -173,13 +185,16 @@ const TodoInput = () => {
                     />
 
                     {errors.to}
-                    <Typography variant="subtitle1">Status</Typography>
-                    <Switch
-                      checked={active}
-                      onChange={() => {
-                        console.log(active);
-                        setActive(!active);
-                      }}
+                    <Typography variant="subtitle1">Active</Typography>
+                    <Field
+                      // checked={active}
+                      // onChange={() => {
+                      //   console.log(active);
+                      //   setActive(!active);
+                      // }}
+                      // <Switch
+                      type="checkbox"
+              
                       color="primary"
                       name="is_active"
                       inputProps={{ "aria-label": "primary checkbox" }}
@@ -216,9 +231,18 @@ const TodoInput = () => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                onChange={(e)=>{setFilterDate(e.target.value)}}
+                onChange={(e) => {
+                  setFilterDate(e.target.value);
+                }}
               />
-              <Button onClick={()=>{dispatch(todosListing({date:filterDate}));setToggleFilterState(!toggleFilterState)}}>Filter</Button>
+              <Button
+                onClick={() => {
+                  dispatch(todosListing({ date: filterDate }));
+                  setToggleFilterState(!toggleFilterState);
+                }}
+              >
+                Filter
+              </Button>
             </Grid>
           </>
         ) : (

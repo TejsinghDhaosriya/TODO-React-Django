@@ -16,6 +16,7 @@ import {
   setTodo,
   selectTodos,
 } from "../todosSlice";
+import { todosListing } from "../actions";
 
 export function* todosListingSaga(params) {
   try {
@@ -45,23 +46,8 @@ export function* todoUpdateSaga(params) {
   } = params;
   try {
     if (setSubmitting) setSubmitting(true);
-    // const data = yield call(formData, values);
-    const { data: result } = yield call(putTodoUpdate, values, values?.id);
-    const todos = yield select(selectTodos);
-    const newTodos = {
-      ...todos,
-      results: (todos?.results || []).todo((r) => {
-        if (r.id === result.id) {
-          return {
-            ...r,
-            ...result,
-          };
-        }
-        return r;
-      }),
-    };
-    yield put(setTodos(newTodos));
-    yield put(setTodo(result));
+    yield call(putTodoUpdate, values, values?.id);
+    yield put(todosListing())
     yield put(
       enqueueSnackbar({
         message: "Todo Update Successful!",
@@ -152,10 +138,3 @@ export function* todoDeleteSaga(params) {
   }
 }
 
-const formData = (values) => {
-  let formData = new FormData();
-  Object.keys(values).forEach((key) => {
-    formData.append(key, values[key]);
-  });
-  return formData;
-};
