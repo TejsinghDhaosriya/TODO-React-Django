@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Todos from './components/Todos/Todos'
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { withTheme }  from "./theme"
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    height: '100%',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(2), // Material UI spacing
+    },
+    position: 'absolute',
+    overflow: 'auto',
+    backgroundColor: theme.palette.background.paper, // Makes it the same color as the paper color
+    backgroundImage: `url(${'https://www.transparenttextures.com/patterns/cubes.png'})`,
+  },
+}));
+
+function App(props) {
+  const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs')); // Anything size xs we return matches
+  const { darkMode, setDarkMode } = props;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid
+      className={classes.root}
+      container
+      justify='center'
+      alignItems={matches ? 'flex-start' : 'center'}
+    >
+      <Grid item>
+        <Paper elevation={8}>
+          {/* <Todos /> */}
+        </Paper>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
+            />
+          }
+          label='Dark Mode'
+        />
+      </Grid>
+      {/* <Footer /> */}
+    </Grid>
   );
 }
 
-export default App;
+export default withTheme(App);
