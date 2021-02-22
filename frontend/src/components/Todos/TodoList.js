@@ -1,18 +1,13 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
-import { todoDelete, todoDetails, todosListing, todoUpdate } from "./actions";
+import { todoDelete, todosListing } from "./actions";
 import {
-  selectTodo,
   selectTodos,
   selectTodosLoading,
   setFormDrawerOpen,
@@ -22,11 +17,6 @@ import {
   Typography,
   CircularProgress,
   makeStyles,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Grid,
 } from "@material-ui/core";
 import Table from "@material-ui/core/Table";

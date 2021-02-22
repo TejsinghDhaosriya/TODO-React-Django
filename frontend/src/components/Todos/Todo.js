@@ -1,20 +1,8 @@
 import React, { useState } from "react";
-// import  DateTimePicker  from 'formik-material-ui-pickers/dist/';
-import { useTodos } from "./store";
-import Box from "@material-ui/core/Box";
 
 import { isEmpty, isPlainObject } from "lodash";
 import { Formik, Form, Field } from "formik";
 
-// import  DateTimePicker  from 'formik-material-ui-pickers/dist/DateTimePicker';
-// import  DateTimePicker  from '@material-ui/pickers/DateTimePicker'
-// import {
-//     SimpleFileUpload,
-//     RadioGroup,
-//     // TextField,
-//     Switch as Switchs,
-
-//   } from "formik-material-ui";
 import TextField from "@material-ui/core/TextField";
 import {
   makeStyles,
@@ -22,17 +10,16 @@ import {
   Button,
   LinearProgress,
   Grid,
-  FormControlLabel,
-  Radio,
   Divider,
-  Drawer,
   Typography,
-  Tooltip,
-  IconButton,
-  Switch,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { selectFormDrawerOpen, selectTodo, setFormDrawerOpen, setTodo } from "./todosSlice";
+import {
+  selectFormDrawerOpen,
+  selectTodo,
+  setFormDrawerOpen,
+  setTodo,
+} from "./todosSlice";
 import { todoAdd, todosListing, todoUpdate } from "./actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,17 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TodoInput = () => {
+const Todo = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
   const todo = useSelector(selectTodo);
-  const [active, setActive] = useState(todo?.is_active||false);
   const [toggleFilterState, setToggleFilterState] = useState(false);
-  // const [toggleAddState, setToggleAddState] = useState(false);
   const [filterDate, setFilterDate] = useState("");
-  const formDrawerOpen = useSelector(selectFormDrawerOpen)
-
+  const formDrawerOpen = useSelector(selectFormDrawerOpen);
 
   return (
     <Grid container direction="column">
@@ -62,15 +46,15 @@ const TodoInput = () => {
         <Button
           onClick={() => {
             setToggleFilterState(false);
-            dispatch(setTodo({}))
-            dispatch(setFormDrawerOpen(!formDrawerOpen))
+            dispatch(setTodo({}));
+            dispatch(setFormDrawerOpen(!formDrawerOpen));
           }}
         >
           {formDrawerOpen ? "Close Todo" : "Add Todo"}
         </Button>
         <Button
           onClick={() => {
-            dispatch(setFormDrawerOpen(false))
+            dispatch(setFormDrawerOpen(false));
             setToggleFilterState(!toggleFilterState);
           }}
         >
@@ -93,13 +77,13 @@ const TodoInput = () => {
               <Divider />
               <Formik
                 initialValues={{
-                  name: todo?.name || "s",
+                  name: todo?.name || "",
                   todo_from: todo?.todo_from,
                   todo_to: todo?.todo_to,
-                  is_active:todo?.is_active,
+                  is_active: todo?.is_active,
                   date: todo?.date,
                 }}
-                enableReinitialize = {true}
+                enableReinitialize={true}
                 validate={(values) => {
                   const errors = {};
                   if (!values.name) {
@@ -116,7 +100,6 @@ const TodoInput = () => {
                   }
                   return errors;
                 }}
-          
                 onSubmit={(values, { setSubmitting }) => {
                   if (!todo?.id)
                     dispatch(
@@ -166,7 +149,7 @@ const TodoInput = () => {
                         shrink: true,
                       }}
                       inputProps={{
-                        step: 300, // 5 min
+                        step: 300,
                       }}
                     />
                     {errors.from}
@@ -181,21 +164,14 @@ const TodoInput = () => {
                         shrink: true,
                       }}
                       inputProps={{
-                        step: 300, // 5 min
+                        step: 300,
                       }}
                     />
 
                     {errors.to}
                     <Typography variant="subtitle1">Active</Typography>
                     <Field
-                      // checked={active}
-                      // onChange={() => {
-                      //   console.log(active);
-                      //   setActive(!active);
-                      // }}
-                      // <Switch
                       type="checkbox"
-              
                       color="primary"
                       name="is_active"
                       inputProps={{ "aria-label": "primary checkbox" }}
@@ -254,4 +230,4 @@ const TodoInput = () => {
   );
 };
 
-export default TodoInput;
+export default Todo;
