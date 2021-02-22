@@ -32,7 +32,7 @@ import {
   Switch,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { selectFormDrawerOpen, selectTodo, setFormDrawerOpen } from "./todosSlice";
+import { selectFormDrawerOpen, selectTodo, setFormDrawerOpen, setTodo } from "./todosSlice";
 import { todoAdd, todosListing, todoUpdate } from "./actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -62,10 +62,11 @@ const TodoInput = () => {
         <Button
           onClick={() => {
             setToggleFilterState(false);
+            dispatch(setTodo({}))
             dispatch(setFormDrawerOpen(!formDrawerOpen))
           }}
         >
-          {formDrawerOpen ? "Close Add Todo" : "Add Todo"}
+          {formDrawerOpen ? "Close Todo" : "Add Todo"}
         </Button>
         <Button
           onClick={() => {

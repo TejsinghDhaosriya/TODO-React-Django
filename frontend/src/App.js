@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper, // Makes it the same color as the paper color
     backgroundImage: `url(${'https://www.transparenttextures.com/patterns/cubes.png'})`,
   },
+  mainContainer:{
+    width:"50%",
+    [theme.breakpoints.down("md")]:{
+      width:"100%"
+    }
+  }
 }));
 
 function App(props) {
@@ -38,10 +44,8 @@ function App(props) {
       alignItems={matches ? 'flex-start' : 'center'}
       
     >
-      <Grid item  style={{width:"50%"}}>
-        <Paper elevation={8}  >
+      <Grid item  className={classes.mainContainer}>
           <Todos  />
-        </Paper>
         <FormControlLabel
           control={
             <Switch
