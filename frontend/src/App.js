@@ -3,7 +3,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Todos from './components/Todos/Todos'
+import Todos from './components/Todos/index'
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withTheme }  from "./theme"
@@ -39,7 +39,7 @@ function App(props) {
     >
       <Grid item>
         <Paper elevation={8}>
-          {/* <Todos /> */}
+          <Todos />
         </Paper>
         <FormControlLabel
           control={

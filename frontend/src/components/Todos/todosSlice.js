@@ -4,7 +4,7 @@ import { get } from "lodash";
 export const todosSlice = createSlice({
   name: "todos",
   initialState: {
-    todos: {},
+    todos: [],
     todosLoading: false,
     todo: null,
     todoLoading: false,
