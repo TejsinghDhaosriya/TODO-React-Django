@@ -1,11 +1,17 @@
-from .base import *
+import dj_database_url
 WSGI_APPLICATION = 'config.wsgi.prod.application'
-DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'URI' :"
-postgres://ihunsvnyvxcsws:29bcc3dcd5d7e5a78bede5591a38f756507f09c5980f324578fb7c1dcb73834d@ec2-3-222-11-129.compute-1.amazonaws.com:5432/d2cpq23loldig8"
+        'NAME': 'root',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
