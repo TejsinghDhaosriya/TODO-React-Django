@@ -4,3 +4,4 @@ django-import-export
 dj-database-url
 whitenoise
 gunicorn==19.9.0
+django-heroku
