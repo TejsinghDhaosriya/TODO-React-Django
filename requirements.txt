@@ -5,4 +5,4 @@ dj-database-url
 whitenoise
 gunicorn
 django-cors-headers
-django_filters
+django-filters
