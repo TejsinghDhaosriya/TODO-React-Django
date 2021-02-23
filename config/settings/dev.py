@@ -2,7 +2,7 @@
 
 from .base import *
 DEBUG = True
-WSGI_APPLICATION = 'config.dev.application'
+WSGI_APPLICATION = 'config.wsgi.dev.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
