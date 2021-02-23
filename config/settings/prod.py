@@ -1,7 +1,7 @@
 import dj_database_url
 import django_heroku
 
-WSGI_APPLICATION = 'config.wsgi.prod.application'
+WSGI_APPLICATION = 'config.prod.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
