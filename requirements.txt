@@ -3,5 +3,5 @@ django-rest-framework
 django-import-export
 dj-database-url
 whitenoise
-gunicorn==19.9.0
+gunicorn
 django-heroku
