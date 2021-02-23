@@ -5,9 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Todos from './components/Todos/index'
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { withTheme }  from "./theme"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+
+import { withTheme }  from "./theme"
 
 const useStyles = makeStyles((theme) => ({
   root: {
