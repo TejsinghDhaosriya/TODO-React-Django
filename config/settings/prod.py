@@ -1,6 +1,6 @@
 import dj_database_url
 from .base import *
-DEBUG = False
+DEBUG = True
 WSGI_APPLICATION = 'config.wsgi.prod.application'
 DATABASES = {
     'default': {
