@@ -38,8 +38,8 @@ Database :- sqlite3 for development env , postgresql for production env
        
 ### Inside the Project-Features :- 
    -user can add , delete, update ,list todos .<br/>
-   -dark mode feature
-   -react-redux-saga arch in frontend
+   -dark mode feature<br/>
+   -react-redux-saga arch in frontend<br/>
    -dev and prod. env for backend
    
 
@@ -48,7 +48,7 @@ Database :- sqlite3 for development env , postgresql for production env
 
 
 
-##Project Link :-
-    [Frontend-Link to Project!](https://tej-todo-frontend.netlify.app/)
+##Project Link :-<br/>
+    [Frontend-Link to Project!](https://tej-todo-frontend.netlify.app/)<br/>
     [Backend-Link to Project!](https://tej-todo-backend.herokuapp.com)
     
