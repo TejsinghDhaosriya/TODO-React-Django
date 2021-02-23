@@ -3,16 +3,13 @@ import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import createRootReducer from "../reducers";
-import { loadState, saveState } from "../useLocalStorage";
 
 export const sagaMiddleware = createSagaMiddleware();
 
 
-export default function configureStore(preloadedState) {
-  const persistedState = loadState() || {};
+export default function configureStore() {
   const store = createStore(
-    createRootReducer(), // root reducer with router state
-    { ...(preloadedState || {}), ...persistedState },
+    createRootReducer(), 
     composeWithDevTools(
       applyMiddleware(sagaMiddleware)
     )
