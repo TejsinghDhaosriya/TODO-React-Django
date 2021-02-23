@@ -50,7 +50,6 @@ const TodoList = () => {
   const todos = useSelector(selectTodos);
 
   const todosLoading = useSelector(selectTodosLoading);
-  console.log(todos);
   useEffect(() => {
     dispatch(todosListing());
   }, []);

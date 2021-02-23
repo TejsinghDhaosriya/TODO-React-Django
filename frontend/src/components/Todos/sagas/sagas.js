@@ -21,9 +21,7 @@ import { todosListing } from "../actions";
 export function* todosListingSaga(params) {
   try {
     yield put(setTodosLoading(true));
-    console.log("params", params);
     const fetchedTodos = yield call(getTodosListing, params.data);
-    console.log(fetchedTodos);
     yield put(setTodos(fetchedTodos.data));
     yield put(setTodosLoading(false));
   } catch (err) {
