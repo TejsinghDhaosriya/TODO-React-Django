@@ -18,3 +18,4 @@ DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ALLOWED_HOSTS = ["tej-todo-backend.herokuapp.com"]
+CORS_ORIGIN_ALLOW_ALL = True
