@@ -1,9 +1,9 @@
 
-# To : Task Management
+# Todo : Task Management
 
 ## Objective of Project 
 
-• Develop a too app <br/>
+• Develop a todo app <br/>
 • Create an API for adding todo <br/>
 • Create an API for updating todo <br/>
 • Create an API for deleting todo <br/>
@@ -49,4 +49,6 @@ Database :- sqlite3 for development env , postgresql for production env
 
 
 ##Project Link :-
-    [Link to Project!](https://tej-todo-backend.herokuapp.com)
+    [Frontend-Link to Project!](https://tej-todo-frontend.netlify.app/)
+    [Backend-Link to Project!](https://tej-todo-backend.herokuapp.com)
+    
