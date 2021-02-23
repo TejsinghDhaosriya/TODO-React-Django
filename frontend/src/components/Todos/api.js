@@ -1,4 +1,6 @@
 import axios from "axios";
+axios.defaults.headers.common['Access-Control-Allow-Origin']='*'
+console.log(axios.defaults.headers.common,'axios')
 export const getTodosListing = (params) => axios.get(`https://tej-todo-backend.herokuapp.com/api/todos`, { params });
 export const postTodoAdd = (data) => axios.post(`https://tej-todo-backend.herokuapp.com/api/todos/`, data);
 export const putTodoUpdate = (data, id) => axios.put(`https://tej-todo-backend.herokuapp.com/api/todos/${id}/`, data);
