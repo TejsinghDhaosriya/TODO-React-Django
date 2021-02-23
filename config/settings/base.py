@@ -29,27 +29,32 @@ SECRET_KEY = 'drw&453iut4&7d#$2sj^f#=3@79z4uy)48o0ou_=aw3^uupgpi'
 # Application definition
 
 INSTALLED_APPS = [
+ 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+        "corsheaders",
     "rest_framework",
-    "corsheaders",
+   
     "import_export",
     "todos",
 ]
 
 MIDDLEWARE = [
+    'todos.corsfix.CustomCorsMiddleware',
+     'corsheaders.middleware.CorsMiddleware',
+     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
      'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -126,5 +131,3 @@ REST_FRAMEWORK = {
  
 }
 
-
-CORS_ORIGIN_ALLOW_ALL = True
