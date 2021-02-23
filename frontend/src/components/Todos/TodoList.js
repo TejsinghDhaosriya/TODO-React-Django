@@ -156,7 +156,7 @@ const TodoList = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => dispatch(todosListing())}
+                onClick={() =>{dispatch(setFormDrawerOpen(false)); dispatch(todosListing())}}
               >
                 All
               </Button>
@@ -165,7 +165,7 @@ const TodoList = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => dispatch(todosListing({ is_active: true }))}
+                onClick={() =>{dispatch(setFormDrawerOpen(false));  dispatch(todosListing({ is_active: true }))}}
               >
                 Completed
               </Button>
@@ -174,7 +174,7 @@ const TodoList = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => dispatch(todosListing({ is_active: false }))}
+                onClick={() => {dispatch(setFormDrawerOpen(false)); dispatch(todosListing({ is_active: false }))}}
               >
                 Not Completed
               </Button>

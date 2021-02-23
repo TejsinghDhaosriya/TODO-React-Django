@@ -116,7 +116,9 @@ const Todo = () => {
                         setSubmitting,
                       })
                     );
+                
                   }
+                  dispatch(setFormDrawerOpen(false))
                 }}
               >
                 {({ submitForm, isSubmitting, errors }) => (
