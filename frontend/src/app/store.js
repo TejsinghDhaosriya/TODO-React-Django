@@ -1,16 +1,12 @@
 import { createStore, applyMiddleware } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
-// import { routerMiddleware } from "connected-react-router";
-import { throttle } from "lodash";
 
-// import history from "../history";
 import createRootReducer from "../reducers";
-import { loadState, saveState } from "../localStorageState";
+import { loadState, saveState } from "../useLocalStorage";
 
 export const sagaMiddleware = createSagaMiddleware();
 
-// export default store;
 
 export default function configureStore(preloadedState) {
   const persistedState = loadState() || {};
@@ -22,10 +18,7 @@ export default function configureStore(preloadedState) {
     )
   );
 
-  store.subscribe(
-    throttle(() => saveState({ auth: store.getState().auth })),
-    1000
-  );
+  
 
   return store;
 }

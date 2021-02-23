@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
 import { isEmpty, isPlainObject } from "lodash";
 import { Formik, Form, Field } from "formik";
-
-import TextField from "@material-ui/core/TextField";
 import {
   makeStyles,
   useTheme,
@@ -12,8 +10,8 @@ import {
   Grid,
   Divider,
   Typography,
+  TextField
 } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
 import {
   selectFormDrawerOpen,
   selectTodo,

@@ -8,7 +8,6 @@ export const todosSlice = createSlice({
     todosLoading: true,
     todo: {},
     todoLoading: false,
-    editTodo: null,
     formDrawerOpen: false,
   },
   reducers: {

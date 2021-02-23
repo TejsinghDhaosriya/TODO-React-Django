@@ -39,4 +39,3 @@ export const withTheme = (Component) => {
   };
 };
 
-// background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); */

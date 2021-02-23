@@ -11,7 +11,6 @@ import Notifier from "./Notifier";
 import configureStore, { sagaMiddleware } from "./app/store";
 import * as serviceWorker from "./serviceWorker";
 import rootSaga from "./sagas";
-import history from "./history";
 import {theme} from "./theme";
 
 const store = configureStore();
