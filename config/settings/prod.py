@@ -1,5 +1,5 @@
 import dj_database_url
-
+from .base import *
 WSGI_APPLICATION = 'config.wsgi.prod.application'
 DATABASES = {
     'default': {
