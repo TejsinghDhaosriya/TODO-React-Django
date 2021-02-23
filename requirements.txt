@@ -4,5 +4,4 @@ django-import-export
 dj-database-url
 whitenoise
 gunicorn
-django-heroku
-corsheaders
+django-cors-headers
