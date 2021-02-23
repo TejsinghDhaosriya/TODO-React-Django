@@ -8,8 +8,8 @@ from core.behaviours import StatusMixin
 
 class Todo(StatusMixin, TimeStampedModel):
     name = models.CharField(_('name'), max_length=255, blank=False, null=False)
-    todo_from = models.TimeField(_("todo_from"), auto_now=False, auto_now_add=False)
-    todo_to = models.TimeField(_("todo_to"), auto_now=False, auto_now_add=False)
+    todo_from = models.CharField(_('todo_from'), max_length=255, blank=False, null=False)
+    todo_to = models.CharField(_('todo_to'), max_length=255, blank=False, null=False)
     date=models.DateField(_("date"), auto_now=False, auto_now_add=False)
     
     def __str__(self):
