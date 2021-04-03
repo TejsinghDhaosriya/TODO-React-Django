@@ -52,3 +52,4 @@ Database :- sqlite3 for development env , postgresql for production env
     [Frontend-Link to Project!](https://tej-todo-frontend.netlify.app/)<br/>
     [Backend-Link to Project!](https://tej-todo-backend.herokuapp.com)
     
+# tej-stock-search
