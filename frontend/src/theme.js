@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import useLocalStorage from './useLocalStorage';
+import useLocalStorage from "./useLocalStorage";
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import purple from "@material-ui/core/colors/purple";
+import green from "@material-ui/core/colors/green";
 
 export const theme = createMuiTheme({
   palette: {
-    type: 'light',
+    type: "light",
     primary: purple,
     secondary: green,
   },
@@ -16,7 +16,7 @@ export const theme = createMuiTheme({
 
 const themeDark = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: "dark",
     primary: purple,
     secondary: green,
   },
@@ -30,7 +30,7 @@ const Theme = (props) => {
 
 export const withTheme = (Component) => {
   return (props) => {
-    const [darkMode, setDarkMode] = useLocalStorage('darkMode', false);
+    const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
     return (
       <Theme darkMode={darkMode}>
         <Component {...props} darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -38,4 +38,3 @@ export const withTheme = (Component) => {
     );
   };
 };
-

@@ -1,11 +1,10 @@
 import { combineReducers } from "redux";
+import orderReducer from "../modules/Checkout/orderReducer";
+import revenueReducer from "../modules/Revenue/revenueReducer";
+import showsReducer from "../modules/Shows/showsReducer";
 
-import snackbarReducer from "./snackbar";
-import todosReducer from '../components/Todos/todosSlice.js'
-const createRootReducer = () =>
-  combineReducers({
-    snackbar: snackbarReducer,
-    todos: todosReducer,
-  });
-
-export default createRootReducer;
+export default combineReducers({
+  shows: showsReducer,
+  currentOrder: orderReducer,
+  revenue: revenueReducer,
+});

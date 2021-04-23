@@ -1,0 +1,62 @@
+.layout {
+  margin: 0 auto;
+  padding: 40px;
+  width: fit-content;
+  h2,
+  h3 {
+    text-align: center;
+  }
+  .row {
+    display: block;
+    margin-bottom: 10px;
+    .seat {
+      display: inline-block;
+      width: 50px;
+      border: 1px solid #e3e3e3;
+      border-radius: 3px;
+      padding: 5px 3px;
+      margin-right: 10px;
+      text-align: center;
+      cursor: pointer;
+      &.empty {
+        border: none;
+        border-radius: 0px;
+        cursor: default;
+      }
+      &.selected {
+        background-color: grey;
+        color: #ffffff;
+      }
+      &.booked {
+        cursor: default;
+        opacity: 0.4;
+        background-color: #e3e3e3;
+      }
+      @media all and (max-width: 768px) {
+        width: 20px;
+        font-size: 14px;
+        padding: 3px;
+      }
+      @media all and (max-width: 410px) {
+        width: 15px;
+        font-size: 12px;
+        padding: 2px;
+      }
+    }
+  }
+  @media all and (max-width: 410px) {
+    padding: 10px;
+  }
+}
+.footer {
+  margin: 30px auto;
+  padding: 10px 50px;
+  width: fit-content;
+  a {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  @media all and (max-width: 768px) {
+    margin: 10px auto;
+  }
+}

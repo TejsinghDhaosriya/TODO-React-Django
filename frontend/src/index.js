@@ -1,32 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
+import { createStore } from "redux";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { SnackbarProvider } from "notistack";
 
 import App from "./App";
-import Notifier from "./Notifier";
-import configureStore, { sagaMiddleware } from "./app/store";
 import * as serviceWorker from "./serviceWorker";
-import rootSaga from "./sagas";
-import {theme} from "./theme";
+import { theme } from "./theme";
+import reducers from "./reducers";
 
-const store = configureStore();
-sagaMiddleware.run(rootSaga);
+let store = createStore(reducers);
 
 ReactDOM.render(
   <React.StrictMode>
-      <Provider store={store}>
-        <SnackbarProvider maxSnack={3}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Notifier />
-            <App />
-          </ThemeProvider>
-        </SnackbarProvider>
-      </Provider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
