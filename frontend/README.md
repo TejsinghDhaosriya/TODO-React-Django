@@ -24,3 +24,8 @@ Frontend :- Reactjs ,Redux
 
 ##Project Link :-<br/>
 [Frontend-Link to Project!](https://tej-bookmyshow.netlify.app/)<br/>
+
+#### This app comes with testing
+
+1.cd src
+2. yarn test
